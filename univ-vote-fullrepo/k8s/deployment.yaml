@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: univ-vote
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: univ-vote
+  template:
+    metadata:
+      labels:
+        app: univ-vote
+    spec:
+      containers:
+        - name: univ-vote
+          image: ghcr.io/YOUR_GITHUB_USERNAME/univ-vote-prototype-mpesa:latest
+          ports:
+            - containerPort: 5000
+          envFrom:
+            - secretRef:
+                name: univ-vote-secret
